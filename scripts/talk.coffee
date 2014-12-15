@@ -5,7 +5,7 @@ module.exports = (robot) ->
   robot.hear /進捗どうですか/, (msg) ->
     msg.send "逆に進捗どうですかね？"
 
-  robot.router.get "/version", (req, res) ->
+  robot.router.post "/version", (req, res) ->
     res.end req
 
   robot.hear /.*(西内|にしうち).*/, (msg) ->
