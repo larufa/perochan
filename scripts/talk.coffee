@@ -20,13 +20,13 @@ module.exports = (robot) ->
     envelope = room: room
 
     if state is "在室"
-      robot.send envelope, "#{name} がお部屋にログインしました！"
+      robot.send envelope, "#{name}くん がお部屋にログインしました٩(ˊᗜˋ*)و"
     else if state is "授業"
-      robot.send envelope, "#{name} は授業に出かけたようです(´･ω･`)"
+      robot.send envelope, "#{name}くん は授業に出かけたようです(´･ω･`)"
     else if state is "学内"
-      robot.send envelope, "#{name} は学内を散歩してるみたいです！"
+      robot.send envelope, "#{name}くん は学内を散歩してるみたいです(๑´ڡ`๑)"
     else if state is "休憩"
-      robot.send envelope, "#{name} は休憩中です( ˘ω˘)"
+      robot.send envelope, "#{name}くん は休憩中です( ˘ω˘)"
     else 
       res.end "Thanks!\n"
       return
