@@ -20,5 +20,5 @@ module.exports = (robot) ->
         if data[3].length is 0
           msg.send "そのキーワードじゃ見つからなかったよ！ちゃんとしたやつ指定しろや"
         else
-          msg.send data[3]
+          msg.send "#{data[3]}"
           msg.send "これでまた１つ賢くなれるね＾＾"
