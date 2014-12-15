@@ -2,7 +2,7 @@ module.exports = (robot) ->
   robot.hear /ぺろちゃん/, (msg) ->
     msg.send "なんや"
 
-  robot.respond /perochan (.*)とは$/i, (msg) ->
+  robot.respond /perochan\s+(.*)とは$/i, (msg) ->
     keyword = encodeURIComponent msg.match[1]
     url = "http://ja.wikipedia.org/w/api.php?action=opensearch&format=json&limit=1&search=#{keyword}"
 
