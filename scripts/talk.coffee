@@ -21,7 +21,8 @@ module.exports = (robot) ->
 
   robot.respond /perochan\s+(.*)とは$/i, (msg) ->
     keyword = encodeURIComponent msg.match[1]
-    url = "http://ja.wikipedia.org/w/api.php?action=opensearch&format=json&limit=1&search=#{keyword}"
+    url = "http://ja.wikipedia.org/w/api.php?action=opensearch&format=json&limit=1&redirects=resolve&search=#{keyword}"
+    msg.send url
 
     robot.http(url)
       .header('Accept', 'application/json')
