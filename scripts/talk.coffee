@@ -2,6 +2,12 @@ module.exports = (robot) ->
   robot.hear /ぺろちゃん/, (msg) ->
     msg.send "なんや"
 
+  robot.hear /進捗どうですか/, (msg) ->
+    msg.send "逆に進捗どうですかね？"
+
+  robot.router.get "/version", (req, res) ->
+    res.end robot.version
+
   robot.hear /.*(西内|にしうち).*/, (msg) ->
     keyword = encodeURIComponent "ラーメン次郎"
     url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=large&hl=ja&safe=off&q=#{keyword}"
@@ -18,6 +24,12 @@ module.exports = (robot) ->
 
         random = Math.floor(Math.random() * 8);
         msg.send "#{data.responseData.results[random].unescapedUrl}"
+
+  robot.respond /perochan\s+選んで(\s+(.*))+$/i, (msg) ->
+        list = msg.match[1].replace(/\s+/g," ");
+        list = list.replace(/^\s+/, "").split(" ");
+        random = Math.floor(Math.random() * list.length);
+        msg.send "【#{list[random]}】 を選んでやったお！"
 
   robot.respond /perochan\s+(.*)とは$/i, (msg) ->
     keyword = encodeURIComponent msg.match[1]
