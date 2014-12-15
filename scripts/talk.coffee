@@ -11,13 +11,13 @@ module.exports = (robot) ->
     state = body.state
 
     if state is "在室"
-      robot.messageRoom "#general", "#{name} がお部屋にログインしました！"
+      robot.messageRoom "C02MKFZDU", "#{name} がお部屋にログインしました！"
     else if state is "授業"
-      robot.messageRoom "#general", "#{name} は授業に出かけたようです(´･ω･`)"
+      robot.messageRoom "C02MKFZDU", "#{name} は授業に出かけたようです(´･ω･`)"
     else if state is "学内"
-      robot.messageRoom "#general", "#{name} は学内を散歩してるみたいです！"
+      robot.messageRoom "C02MKFZDU", "#{name} は学内を散歩してるみたいです！"
     else if state is "休憩"
-      robot.messageRoom "#general", "#{name} は休憩中です( ˘ω˘)"
+      robot.messageRoom "C02MKFZDU", "#{name} は休憩中です( ˘ω˘)"
     else 
       res.end "Thanks!\n"
       return
