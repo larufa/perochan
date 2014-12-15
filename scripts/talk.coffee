@@ -19,6 +19,22 @@ module.exports = (robot) ->
 
         if data[3].length is 0
           msg.send "そのキーワードじゃ見つからなかったよ！ちゃんとしたやつ指定しろや"
+          return
         else
-          msg.send "#{data[3]}"
+          msg.send "#{decodeURIComponent(data[3])}"
           msg.send "これでまた１つ賢くなれるね＾＾"
+          msg.send "あっ，ちなみに画像はコレだよ！"
+
+          url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=1&hl=ja&safe=off&q=#{keyword}"
+          robot.http(url)
+            .get() (err, res, body) ->
+
+              data = null
+              try
+                data = JSON.parse(body)
+              catch error
+                 msg.send "Ran into an error parsing JSON :("
+                 return
+
+              msg.send "#{data.responseData.results[0].unescapedUrl}"
+              msg.send "じゃじゃーん！"
