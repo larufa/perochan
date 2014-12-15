@@ -5,26 +5,28 @@ module.exports = (robot) ->
   robot.hear /進捗どうですか/, (msg) ->
     msg.send "逆に進捗どうですかね？"
 
-  robot.router.post '/:room', (req, res) ->
-    room = req.params.room
-    message = req.body.message
-    envelope = room: room
-    robot.send envelope, message
-    res.end()
+  #robot.router.post '/:room', (req, res) ->
+  #  room = req.params.room
+  #  message = req.body.message
+  #  envelope = room: room
+  #  robot.send envelope, message
+  #  res.end()
 
   robot.router.post "/attendance", (req, res) ->
     body = req.body
     name = body.name
     state = body.state
+    room = 'general'
+    envelope = room: room
 
     if state is "在室"
-      robot.messageRoom "C02MKFZDU", "#{name} がお部屋にログインしました！"
+      robot.send envelope, "#{name} がお部屋にログインしました！"
     else if state is "授業"
-      robot.messageRoom "C02MKFZDU", "#{name} は授業に出かけたようです(´･ω･`)"
+      robot.send envelope, "#{name} は授業に出かけたようです(´･ω･`)"
     else if state is "学内"
-      robot.messageRoom "C02MKFZDU", "#{name} は学内を散歩してるみたいです！"
+      robot.send envelope, "#{name} は学内を散歩してるみたいです！"
     else if state is "休憩"
-      robot.messageRoom "C02MKFZDU", "#{name} は休憩中です( ˘ω˘)"
+      robot.send envelope, "#{name} は休憩中です( ˘ω˘)"
     else 
       res.end "Thanks!\n"
       return
