@@ -5,8 +5,23 @@ module.exports = (robot) ->
   robot.hear /進捗どうですか/, (msg) ->
     msg.send "逆に進捗どうですかね？"
 
-  robot.router.post "/version", (req, res) ->
-    res.end req
+  robot.router.post "/attendance", (req, res) ->
+    body = req.body
+    name = body.name
+    state = body.state
+
+    if state is "在室"
+      robot.messageRoom "#general", "#{name} がお部屋にログインしました！"
+    else if state is "授業"
+      robot.messageRoom "#general", "#{name} は授業に出かけたようです(´･ω･`)"
+    else if state is "学内"
+      robot.messageRoom "#general", "#{name} は学内を散歩してるみたいです！"
+    else if state is "休憩"
+      robot.messageRoom "#general", "#{name} は休憩中です( ˘ω˘)"
+    else 
+      res.end "Thanks!\n"
+      return
+    res.end "Thanks!\n"
 
   robot.hear /.*(西内|にしうち).*/, (msg) ->
     keyword = encodeURIComponent "ラーメン次郎"
