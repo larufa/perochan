@@ -6,7 +6,7 @@ module.exports = (robot) ->
     msg.send "逆に進捗どうですかね？"
 
   robot.router.get "/version", (req, res) ->
-    res.end robot.version
+    res.end req
 
   robot.hear /.*(西内|にしうち).*/, (msg) ->
     keyword = encodeURIComponent "ラーメン次郎"
