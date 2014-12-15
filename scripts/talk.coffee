@@ -8,7 +8,8 @@ module.exports = (robot) ->
   robot.router.post '/:room', (req, res) ->
     room = req.params.room
     message = req.body.message
-    robot.messageRoom room, message
+    envelope = room: room
+    robot.send envelope, message
     res.end()
 
   robot.router.post "/attendance", (req, res) ->
