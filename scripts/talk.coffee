@@ -33,7 +33,7 @@ module.exports = (robot) ->
     res.end "Thanks!\n"
 
   robot.hear /.*(藤原|ふじはら|hujihara|fujihara|huzihara|fuzihara).*/, (msg) ->
-    msg.send "遅刻の常習犯等言えば，ふじはらさんですね"
+    msg.send "遅刻の常習犯と言えば，ふじはらさんですね"
 
 
   robot.hear /.*(西内|にしうち|nishiuchi|nisiuchi|nishiuti|nishiuchi|nisiuchi|nisiuti).*/, (msg) ->
