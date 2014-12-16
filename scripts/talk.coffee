@@ -96,3 +96,4 @@ module.exports = (robot) ->
 
               msg.send "#{data.responseData.results[0].unescapedUrl}"
               msg.send "じゃじゃーん！"
+
