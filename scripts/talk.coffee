@@ -32,7 +32,11 @@ module.exports = (robot) ->
       return
     res.end "Thanks!\n"
 
-  robot.hear /.*(西内|にしうち).*/, (msg) ->
+  robot.hear /.*(藤原|ふじはら|hujihara|fujihara|huzihara|fuzihara).*/, (msg) ->
+    msg.send "遅刻の常習犯等言えば，ふじはらさんですね"
+
+
+  robot.hear /.*(西内|にしうち|nishiuchi|nisiuchi|nishiuti|nishiuchi|nisiuchi|nisiuti).*/, (msg) ->
     keyword = encodeURIComponent "ラーメン次郎"
     url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=large&hl=ja&safe=off&q=#{keyword}"
     
