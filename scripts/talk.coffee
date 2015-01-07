@@ -5,12 +5,12 @@ module.exports = (robot) ->
   robot.hear /進捗どうですか/, (msg) ->
     msg.send "逆に進捗どうですかね？"
 
-  #robot.router.post '/:room', (req, res) ->
-  #  room = req.params.room
-  #  message = req.body.message
-  #  envelope = room: room
-  #  robot.send envelope, message
-  #  res.end()
+  #robot.router.post '/message/:message', (req, res) ->
+    room = 'general'
+    message = req.params.message
+    envelope = room: room
+    robot.send envelope, message
+    res.end()
 
   robot.router.post "/attendance", (req, res) ->
     body = req.body
