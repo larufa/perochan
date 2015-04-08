@@ -35,6 +35,24 @@ module.exports = (robot) ->
   robot.hear /.*(藤原|ふじはら|hujihara|fujihara|huzihara|fuzihara).*/, (msg) ->
     msg.send "遅刻の常習犯と言えば，ふじはらさんですね"
 
+  robot.hear /.*(源本|げんもと|ゲンモト|genmoto).*/, (msg) ->
+    msg.send "ゼミ長"
+    keyword = encodeURIComponent "源本"
+    url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=large&hl=ja&safe=off&q=#{keyword}"
+
+    robot.http(url)
+      .get() (err, res, body) ->
+
+        data = null
+        try
+          data = JSON.parse(body)
+        catch error
+          msg.send "Ran into an error parsing JSON :("
+          return
+
+        random = Math.floor(Math.random() * 8);
+        msg.send "#{data.responseData.results[random].unescapedUrl}"
+
 
   robot.hear /.*(西内|にしうち|nishiuchi|nisiuchi|nishiuti|nishiuchi|nisiuchi|nisiuti).*/, (msg) ->
     keyword = encodeURIComponent "ラーメン次郎"
