@@ -32,9 +32,6 @@ module.exports = (robot) ->
       return
     res.end "Thanks!\n"
 
-  robot.hear /.*(藤原|ふじはら|hujihara|fujihara|huzihara|fuzihara).*/, (msg) ->
-    msg.send "遅刻の常習犯と言えば，ふじはらさんですね"
-
   robot.hear /.*(源本|げんもと|ゲンモト|genmoto).*/, (msg) ->
     msg.send "ゼミ長"
     keyword = encodeURIComponent "源本"
@@ -51,6 +48,7 @@ module.exports = (robot) ->
           return
 
         random = Math.floor(Math.random() * 8);
+        console.log(data);
         msg.send "#{data.responseData.results[random].unescapedUrl}"
 
 
@@ -77,14 +75,15 @@ module.exports = (robot) ->
         random = Math.floor(Math.random() * list.length);
         msg.send "【#{list[random]}】 を選んでやったお！"
 
-  robot.respond /perochan\s+(.*)とは$/i, (msg) ->
+  robot.hear /perochan\s+(.*)とは$/i, (msg) ->
     keyword = encodeURIComponent msg.match[1]
-    url = "http://ja.wikipedia.org/w/api.php?action=opensearch&format=json&limit=1&redirects=resolve&search=#{keyword}"
+    url = "https://ja.wikipedia.org/w/api.php?action=opensearch&format=json&limit=1&redirects=resolve&search=#{keyword}"
 
-    robot.http(url)
-      .header('Accept', 'application/json')
-      .get() (err, res, body) ->
-
+    request = robot.http(url)
+              .header('Accept', 'application/json')
+              .get()
+      
+    request (err, res, body) ->
         data = null
         try
           data = JSON.parse(body)
@@ -95,23 +94,23 @@ module.exports = (robot) ->
         if data[3].length is 0
           msg.send "そのキーワードじゃ見つからなかったよ！ちゃんとしたやつ指定しろや"
           return
-        else
-          msg.send "#{decodeURIComponent(data[3])}"
-          msg.send "これでまた１つ賢くなれるね＾＾"
-          msg.send "あっ，ちなみに画像はコレだよ！"
-
-          url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=1&hl=ja&safe=off&q=#{keyword}"
-
-          robot.http(url)
-            .get() (err, res, body) ->
-
-              data = null
-              try
-                data = JSON.parse(body)
-              catch error
-                 msg.send "Ran into an error parsing JSON :("
-                 return
-
-              msg.send "#{data.responseData.results[0].unescapedUrl}"
-              msg.send "じゃじゃーん！"
-
+         else
+           msg.send "#{decodeURIComponent(data[3])}"
+           msg.send "これでまた１つ賢くなれるね＾＾"
+        #   msg.send "あっ，ちなみに画像はコレだよ！"
+        #
+        #   url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=1&hl=ja&safe=off&q=#{keyword}"
+        #
+        #   robot.http(url)
+        #     .get() (err, res, body) ->
+        #
+        #       data = null
+        #       try
+        #         data = JSON.parse(body)
+        #       catch error
+        #          msg.send "Ran into an error parsing JSON :("
+        #          return
+        #
+        #       msg.send "#{data.responseData.results[0].unescapedUrl}"
+        #       msg.send "じゃじゃーん！"
+        #
