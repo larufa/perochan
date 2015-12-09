@@ -5,6 +5,9 @@ module.exports = (robot) ->
   robot.hear /進捗どうですか/, (msg) ->
     msg.send "逆に進捗どうですかね？"
 
+  robot.hear /おなかすいた/, (msg) ->
+    msg.send "おなかすいてないし！"
+
   robot.router.get '/message/:message', (req, res) ->
     room = 'general'
     message = req.params.message
@@ -48,7 +51,6 @@ module.exports = (robot) ->
           return
 
         random = Math.floor(Math.random() * 8);
-        console.log(data);
         msg.send "#{data.responseData.results[random].unescapedUrl}"
 
 
@@ -90,7 +92,7 @@ module.exports = (robot) ->
         catch error
           msg.send "Ran into an error parsing JSON :("
           return
-
+ 
         if data[3].length is 0
           msg.send "そのキーワードじゃ見つからなかったよ！ちゃんとしたやつ指定しろや"
           return
