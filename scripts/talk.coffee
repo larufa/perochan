@@ -15,6 +15,13 @@ module.exports = (robot) ->
     robot.send envelope, message
     res.end()
 
+  robot.router.get '/minecraft/message/:message', (req, res) ->
+    room = 'minecraft'
+    message = req.params.message
+    envelope = room: room
+    robot.send envelope, message
+    res.end()
+
   robot.router.post "/attendance", (req, res) ->
     body = req.body
     name = body.name
